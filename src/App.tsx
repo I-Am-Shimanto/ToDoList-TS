@@ -30,7 +30,7 @@ function App() {
     e.preventDefault();
 
     if (data) {
-      set(push(ref(db, "todolist/")), {
+      set(push(ref(db, "todolistTS/")), {
         todoitem: data,
       });
       setDataErr("")
@@ -41,7 +41,7 @@ function App() {
   };
 
   useEffect(() => {
-    onValue(ref(db, "todolist/"), (snapshot) => {
+    onValue(ref(db, "todolistTS/"), (snapshot) => {
       const arr: todoitem[] = [];
       snapshot.forEach((item) => {
         arr.push({ ...item.val(), id: item.key });
@@ -57,7 +57,7 @@ function App() {
 
   const handleUpdate = () => {
     if (!(editedValue.todoitem == "")) {
-      update(ref(db, "todolist/" + editedValue.id), {
+      update(ref(db, "todolistTS/" + editedValue.id), {
         todoitem: editedValue.todoitem,
       });
       setIsEdit(false);
@@ -67,7 +67,7 @@ function App() {
   };
 
   const handleDelete = (item: todoitem) => {
-    remove(ref(db, "todolist/" + item.id));
+    remove(ref(db, "todolistTS/" + item.id));
   };
 
   return (
